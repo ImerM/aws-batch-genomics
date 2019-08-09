@@ -157,7 +157,7 @@ Resources:
             "Volume": {
               "type": "String",
               "description": "Volume to mount.",
-              "default": "/dev/nvme1n1"
+              "default": "/dev/sdb"
             },
             "TargetAmiName": {
               "type": "String",
@@ -281,11 +281,11 @@ Resources:
                     "set -e",
                     "yum -y update",
                     "yum -y install parted",
-                    "parted /dev/nvme1n1 mklabel gpt -s",
-                    "parted /dev/nvme1n1 mkpart primary 0% 100% -s",
-                    "mkfs -t ext4 -F /dev/nvme1n1",
+                    "parted {{Volume}} mklabel gpt -s",
+                    "parted {{Volume}} mkpart primary 0% 100% -s",
+                    "mkfs -t ext4 -F {{Volume}}",
                     "mkdir /docker_scratch",
-                    "echo -e '/dev/nvme1n1\t/docker_scratch\text4\tdefaults\t0\t0' | sudo tee -a /etc/fstab",
+                    "echo -e '{{Volume}}\t/docker_scratch\text4\tdefaults\t0\t0' | sudo tee -a /etc/fstab",
                     "mount -a"
                   ]
                 }

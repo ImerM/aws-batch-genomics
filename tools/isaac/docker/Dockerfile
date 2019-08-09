@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7-stretch
 
 ARG VERSION="03.17.03.01"
 
